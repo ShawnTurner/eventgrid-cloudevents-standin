@@ -1,0 +1,28 @@
+# Python
+*.py[cod]
+*.pyo
+*.pyd
+__pycache__
+
+# Directories
+bin/
+include/
+lib/
+lib64/
+share/
+
+# Files
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.tar.gz
+
+# OS-specific
+.DS_Store
+ehthumbs.db
+Icon
+Thumbs.db
+
+.vscode/settings.json

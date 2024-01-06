@@ -1,0 +1,5 @@
+flask==2.0.1
+cloudevents==1.2.0
+fastapi
+uvicorn
+starlette
