@@ -11,7 +11,7 @@ This is _not_ any kind of EventGrid emulator or simulator. It is meant to be com
 
     `docker compose up --build`
 
-2. Send a CloudEvents message in python using the CloudEvent SDK
+2. Send a CloudEvents message [in python](./producer/producer.py) using the CloudEvent SDK
 
     ```shell
     export EVENT_GRID_ENDPOINT=http://localhost:9000/hooks/test-topic
@@ -21,7 +21,7 @@ This is _not_ any kind of EventGrid emulator or simulator. It is meant to be com
     Event published.
     ```
 
-3. Check consumer and webhook logs for processing
+3. Check [consumer](./consumer/consumer.py) and [webhook](./eventgrid-standin/test-topic.webhook.py) logs for message processing
 
     ```shell
     2024-01-06 16:01:39 INFO:     Started server process [1]
@@ -37,13 +37,15 @@ This is _not_ any kind of EventGrid emulator or simulator. It is meant to be com
 
 > To verify that the producer and consumer are compatible with real EventGrid subscriptions
 
-0. 
-  - Register with ngrok and configure your auth token
-  - create an Azure EventGrid topic.
+0. Pre-reqs
+    - Register with ngrok and configure your auth token
+    - create an Azure EventGrid topic.
 
-1. `docker run -it -p 4040:4040 -e NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN ngrok/ngrok http 8000` or set env var and uncomment ngrok in [docker-compose.yaml](./docker-compose.yaml).
+1. Open the ngrok tunnel
 
-2. Assure that the consumer can process a cloud event
+     `docker run -it -p 4040:4040 -e NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN ngrok/ngrok http 8000` or set env var and uncomment ngrok in [docker-compose.yaml](./docker-compose.yaml).
+
+2. Assure that the consumer can process a local cloud event POST
 
     ```shell
     curl -X POST -H "Content-Type: application/cloudevents+json" -d '{
