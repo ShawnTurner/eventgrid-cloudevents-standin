@@ -16,6 +16,7 @@ services:
     restart: always
     container_name: webhook
 
+  # for integration testing with Azure Event Grid
   # ngrok:
   #   image: ngrok/ngrok
   #   command: http consumer:8000

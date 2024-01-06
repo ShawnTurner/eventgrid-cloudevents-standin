@@ -1,3 +1,4 @@
+# Attribution: https://github.com/almir/docker-webhook
 # Dockerfile for https://github.com/adnanh/webhook
 FROM        golang:alpine AS build
 MAINTAINER  Almir Dzinovic <almir@dzinovic.net>
@@ -9,7 +10,7 @@ RUN         curl -L --silent -o webhook.tar.gz https://github.com/adnanh/webhook
 RUN         go get -d -v
 RUN         CGO_ENABLED=0 go build -ldflags="-s -w" -o /usr/local/bin/webhook
 
-# customized from Scratch to python:3.10 so our hook scripts have tools
+# customized from Scratch to python:3.10 so our hook scripts have tools. https://github.com/ShawnTurner/eventgrid-cloudevents-standin
 FROM        python:3.10.12
 RUN         apt-get update && apt-get install -y curl
 COPY        --from=build /usr/local/bin/webhook /usr/local/bin/webhook

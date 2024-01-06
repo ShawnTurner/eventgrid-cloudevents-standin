@@ -15,9 +15,7 @@ client = EventGridPublisherClient(endpoint, credential)
 event = CloudEvent(
     source="/myapp/messages",
     type="MyApp.MessagePublished",
-    data={
-        "message": "Hello, Azure EventGrid!"
-    }
+    data={"message": "Hello, Azure EventGrid!"},
 )
 
 # Send the event
