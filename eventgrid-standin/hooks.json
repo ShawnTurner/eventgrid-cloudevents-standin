@@ -1,0 +1,16 @@
+[
+    {
+        "id": "test-topic",
+        "execute-command": "/usr/local/bin/python",
+        "command-working-directory": "/etc/webhook",
+        "pass-arguments-to-command": [
+            {
+                "source": "string",
+                "name": "test-topic.webhook.py"
+            },
+            {
+                "source": "entire-payload"
+            }
+        ]
+    }
+]

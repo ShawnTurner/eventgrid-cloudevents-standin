@@ -6,14 +6,24 @@ services:
       - 8000:8000
     restart: always
 
-  ngrok:
-    image: ngrok/ngrok
-    command: http consumer:8000
+  event-grid:
+    build: ./eventgrid-standin
+    command: -verbose -hooks=/etc/webhook/hooks.json -hotreload
+    volumes:
+      - ./eventgrid-standin:/etc/webhook
     ports:
-      - 4040:4040
-    environment:
-      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
-    depends_on:
-      - consumer
-    stdin_open: true
-    tty: true
+      - 9000:9000
+    restart: always
+    container_name: webhook
+
+  # ngrok:
+  #   image: ngrok/ngrok
+  #   command: http consumer:8000
+  #   ports:
+  #     - 4040:4040
+  #   environment:
+  #     - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+  #   depends_on:
+  #     - consumer
+  #   stdin_open: true
+  #   tty: true
